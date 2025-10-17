@@ -1,0 +1,46 @@
+{% extends 'portfolio/base.html' %}
+
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'portfolio/css/home.css' %}">
+
+{% include 'portfolio/includes/navbar.html' %}
+
+    <section class="hero">
+        <div class="container">
+            <h1>Python Full-Stack Developer</h1>
+            <p class="subtitle">Building web apps with Django and desktop apps with Tkinter</p>
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <h2>Web Projects (Django)</h2>
+        <div class="project-grid">
+            {% for project in web_projects %}
+            <div class="project-card">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description|truncatechars:100 }}</p>
+                <a href="{% url 'project_detail' project.pk %}" class="btn">View Details</a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <h2>Desktop Projects (Tkinter)</h2>
+        <div class="project-grid">
+            {% for project in desktop_projects %}
+            <div class="project-card">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description|truncatechars:100 }}</p>
+                <a href="{% url 'project_detail' project.pk %}" class="btn">View Details</a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% include 'portfolio/includes/skills.html' %}
+
+{% endblock %}
